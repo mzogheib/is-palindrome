@@ -13,7 +13,7 @@
 
     function checkPalindrome() {
         result.innerHTML = isPalindrome(textarea.value) ? '👍' : '👎';
-        var eventValue = isPalindrome(textarea.value) ? 1 : 0;
+        var eventValue = isPalindrome(textarea.value) ? textarea.value.length : 0;
         track(textarea.value, eventValue);
     }
 
