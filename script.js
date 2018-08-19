@@ -12,9 +12,20 @@
     submitButton.addEventListener('click', checkPalindrome);
 
     function checkPalindrome() {
-        result.innerHTML = isPalindrome(textarea.value) ? '👍' : '👎';
-        var eventValue = isPalindrome(textarea.value) ? textarea.value.length : 0;
-        track(textarea.value, eventValue);
+        var input = textarea.value;
+        var inputLength = input ? input.length : 0;
+
+        if (inputLength < 2) {
+            return;
+        }
+
+        if (isPalindrome(input)) {
+            result.innerHTML = '👍';
+            track('submit-valid', input, inputLength);
+        } else {
+            result.innerHTML = '👎';
+            track('submit-invalid', input, inputLength);
+        }
     }
 
     function onTextareaChange () {
@@ -29,9 +40,8 @@
         return reverseStr === lowRegStr;
     }
 
-    function track(label, value) {
+    function track(action, label, value) {
         var category = 'palindrome';
-        var action = 'submit';
         gtag('event', action, { 'event_category': category, 'event_label': label, 'value': value });
     }
 })();
