@@ -13,6 +13,8 @@
 
     function checkPalindrome() {
         result.innerHTML = isPalindrome(textarea.value) ? '👍' : '👎';
+        var eventValue = isPalindrome(textarea.value) ? 1 : 0;
+        track(textarea.value, eventValue);
     }
 
     function onTextareaChange () {
@@ -25,5 +27,11 @@
         var lowRegStr = str.toLowerCase().replace(re, '');
         var reverseStr = lowRegStr.split('').reverse().join('');
         return reverseStr === lowRegStr;
+    }
+
+    function track(label, value) {
+        var category = 'palindrome';
+        var action = 'submit';
+        gtag('event', action, { 'event_category': category, 'event_label': label, 'value': value });
     }
 })();
